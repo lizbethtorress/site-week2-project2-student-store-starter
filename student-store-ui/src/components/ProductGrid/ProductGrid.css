@@ -1,0 +1,19 @@
+.product-grid {
+    width: 100%;
+    display: grid;
+    max-width: 800px;
+    margin: 0 auto;
+    grid-template-columns: repeat(4, 1fr);
+}
+.product-grid img{
+    max-width: 100%;
+}
+/* .product-grid .product-card {
+    height: 350px;
+    width: 250px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    border: solid 1px var(--border-color);
+    grid-template-columns: repeat(4, 1fr);
+} */
