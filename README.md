@@ -26,6 +26,9 @@ The video for this project
     <img style="max-width:300px;" src="null">
   </a>
 
+  https://www.loom.com/share/8bb24453223d4863b7056f05a9563b5a?sid=a9b66e0c-4dbb-4070-a63a-4f55131b8982
+  
+
 ### Stretch Features
 
 - [ ] Users can click to expand the shopping cart in the left navigation.
