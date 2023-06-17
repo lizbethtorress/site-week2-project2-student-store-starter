@@ -1,8 +1,9 @@
 import React from "react";
 import "./SecondBar.css";
 import { useState } from "react";
+import Home from "../Home/Home";
 
-const SecondBar = ({ handleSubmit }) => {
+const SecondBar = ({ handleSubmit, handleCategory, onCategory }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (event) => {
@@ -10,13 +11,14 @@ const SecondBar = ({ handleSubmit }) => {
     setSearchTerm(item);
     handleSubmit(item);
   };
-  const [categoryProd, setcategoryProd] = useState([]);
+  // const [categoryProd, setcategoryProd] = useState([]);
 
-  const handleCategory = (category) => {
-    setcategoryProd(category)
-  }
+  // const handleCategory = (category) => {
+  //   setcategoryProd(category)
+  // }
 
-  
+  const categories = ["All Categories", "Clothing","Food", "Accessories", "Tech"]
+
   return (
     <div className="secondBar">
       <div className="content">
@@ -42,26 +44,6 @@ const SecondBar = ({ handleSubmit }) => {
           </div>
         </div>
         <div className="row">
-          <div className="hamburger-menu">
-            <i className="material-icons">menu</i>
-          </div>
-          <div className="category-menu open">
-            <li className="is-active">
-              <button onClick={() => handleCategory(null)} >All Categories</button>
-            </li>
-            <li className="">
-              <button onClick={() => handleCategory("clothing")}>Clothing</button>
-            </li>
-            <li className="">
-              <button onClick={() => handleCategory("food")}>Food</button>
-            </li>
-            <li className="">
-              <button onClick={() => handleCategory("accessories")}>Accessories</button>
-            </li>
-            <li className="">
-              <button onClick={() => handleCategory("tech")}>Tech</button>
-            </li>
-          </div>
         </div>
       </div>
     </div>

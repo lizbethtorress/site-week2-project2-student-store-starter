@@ -1,42 +1,52 @@
-import * as React from "react"
-import { BrowserRouter } from 'react-router-dom'
-import Navbar from "../Navbar/Navbar"
-import Sidebar from "../Sidebar/Sidebar"
-import ProductGrid from '../ProductGrid/ProductGrid';
-import Hero from "../Hero/Hero"
-import SecondBar from "../SecondBar/SecondBar"
-import "./Home.css"
+import * as React from "react";
+import { BrowserRouter } from "react-router-dom";
+import Navbar from "../Navbar/Navbar";
+import Sidebar from "../Sidebar/Sidebar";
+import ProductGrid from "../ProductGrid/ProductGrid";
+import Hero from "../Hero/Hero";
+import SecondBar from "../SecondBar/SecondBar";
+import "./Home.css";
 import { Link } from "react-router-dom";
 import About from "../About/About";
 import Content from "../Content/Content";
 import Contact from "../Contact/Contact";
 import { useState, useEffect } from "react";
 
-
-
 const Home = ({ products, handleAddItemToCart, handleRemoveItemFromCart }) => {
-
-  const [originalProduct, setoriginalProduct] = useState([])
+  const [originalProduct, setoriginalProduct] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  // const [categoryProd, setcategoryProd] = useState([]);
-  
 
-  
+  const [categoryProd, setcategoryProd] = useState([]);
+
+  const handleCategory = (category) => {
+    setcategoryProd(category);
+  };
+
+  const handleClick = (event) => {
+    setFilteredData(
+      products.filter((product) =>
+        product.category
+          .toLowerCase()
+          .includes(event.target.value.toLowerCase())
+      )
+    );
+  };
+
   const handleSubmit = (event) => {
     // event.preventDefault();
-    console.log("product check", originalProduct)
+    // console.log("product check", originalProduct)
     const filtered = originalProduct.filter((item) =>
       item.name.toLowerCase().includes(event.toLowerCase())
     );
-    setFilteredData(filtered)
+    setFilteredData(filtered);
   };
-  useEffect(()=>{
+  useEffect(() => {
     fetchProducts();
   }, []);
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     setFilteredData(originalProduct);
-  },[originalProduct])
+  }, [originalProduct]);
 
   const fetchProducts = async () => {
     try {
@@ -44,14 +54,13 @@ const Home = ({ products, handleAddItemToCart, handleRemoveItemFromCart }) => {
         "https://codepath-store-api.herokuapp.com/store"
       );
       const data = await response.json();
-      console.log("data check", data)
+      console.log("data check", data);
       const fetchedProducts = data.products;
       setoriginalProduct(fetchedProducts);
     } catch (error) {
       console.log(error);
     }
   };
-
 
   // const handleCategory = (category) => {
   //   setcategoryProd(category)
@@ -68,27 +77,40 @@ const Home = ({ products, handleAddItemToCart, handleRemoveItemFromCart }) => {
   //   }
   // };
 
-
-
   return (
     <div className="home">
-      {/* <Hero /> */}
-      {/* <SecondBar/> */}
-      <SecondBar 
-      handleSubmit={handleSubmit}
+      <SecondBar
+        handleSubmit={handleSubmit}
+        handleCategory={categoryProd}
+        onCategory={handleCategory}
       />
+      <div className="row">
+        <div className="buttons">
+          <div className="hamburger-menu">
+            <i className="material-icons">menu</i>
+          </div>
+          <button>All Categories</button>
+          <button value="clothing" onClick={handleClick}>
+            Clothing{" "}
+          </button>
+          <button value="food" onClick={handleClick}>
+            Food{" "}
+          </button>
+          <button value="Accessories" onClick={handleClick}>
+            Accesories
+          </button>
+        </div>
+      </div>
       <ProductGrid
         products={filteredData}
         handleAddItemToCart={handleAddItemToCart}
         handleRemoveItemFromCart={handleRemoveItemFromCart}
       />
-      <About/>
-      <Contact/>
-      <Content/>
+      <About />
+      <Contact />
+      <Content />
     </div>
   );
 };
 
 export default Home;
-
-  

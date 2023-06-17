@@ -6,3 +6,42 @@
   display: flex;
   flex-direction: column;
 }
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.buttons button {
+  margin-right: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #f2f2f2;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.buttons button:hover {
+  background-color: #eaeaea;
+}
+
+.buttons button:focus {
+  outline: none;
+}
+.buttons .hamburger-menu {
+  margin-right: 40px;
+}
+.secondBar .category-menu li button {
+  cursor: pointer;
+  transition: all 0.1s ease;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-weight: 500;
+  font-size: 18px;
+  padding-bottom: 10px;
+  border-bottom: solid 2px transparent;
+  transition: all 0.2s ease;
+}
