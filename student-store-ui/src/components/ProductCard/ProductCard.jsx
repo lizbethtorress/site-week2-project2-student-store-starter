@@ -11,16 +11,14 @@ const ProductCard = ({
     showDescription
     }) => {
     
-    // const { id, name, price, description, image } = product;
-    
     const formattedPrice = `${product.price}`;
     
     const handleAddToCart = () => {
-    handleAddItemToCart(product.id);
+    handleAddItemToCart(productId);
     };
     
     const handleRemoveFromCart = () => {
-    handleRemoveItemToCart(product.id);
+    handleRemoveItemToCart(productId);
     };
 
   return (
@@ -43,6 +41,5 @@ const ProductCard = ({
   </div>             
   )
 }
-
 
 export default ProductCard

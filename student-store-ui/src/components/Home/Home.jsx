@@ -23,6 +23,9 @@ const Home = ({ products, handleAddItemToCart, handleRemoveItemFromCart }) => {
   };
 
   const handleClick = (event) => {
+    if (event.target.value.toLowerCase === "all categories") {
+      setFilteredData(products)
+    }
     setFilteredData(
       products.filter((product) =>
         product.category
@@ -33,8 +36,6 @@ const Home = ({ products, handleAddItemToCart, handleRemoveItemFromCart }) => {
   };
 
   const handleSubmit = (event) => {
-    // event.preventDefault();
-    // console.log("product check", originalProduct)
     const filtered = originalProduct.filter((item) =>
       item.name.toLowerCase().includes(event.toLowerCase())
     );
@@ -62,21 +63,6 @@ const Home = ({ products, handleAddItemToCart, handleRemoveItemFromCart }) => {
     }
   };
 
-  // const handleCategory = (category) => {
-  //   setcategoryProd(category)
-  // }
-
-  // const handleCategoryFilter = (category) => {
-  //   if (category === "All Categories") {
-  //     setFilteredProducts(originalProduct);
-  //   } else {
-  //     const filtered = originalProduct.filter(
-  //       (item) => item.category.toLowerCase() === category.toLowerCase()
-  //     );
-  //     setFilteredProducts(filtered);
-  //   }
-  // };
-
   return (
     <div className="home">
       <SecondBar
@@ -89,7 +75,9 @@ const Home = ({ products, handleAddItemToCart, handleRemoveItemFromCart }) => {
           <div className="hamburger-menu">
             <i className="material-icons">menu</i>
           </div>
-          <button>All Categories</button>
+          <button value="All Categories" onClick={handleClick}>
+            All Categories{" "}
+          </button>
           <button value="clothing" onClick={handleClick}>
             Clothing{" "}
           </button>

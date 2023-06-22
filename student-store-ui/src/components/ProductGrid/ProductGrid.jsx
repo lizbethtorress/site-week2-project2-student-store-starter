@@ -16,6 +16,7 @@ const ProductGrid = ({
         <ProductCard
           key={product.id}
           product={product}
+          productId={product.id}
           handleAddItemToCart={handleAddItemToCart}
           handleRemoveItemToCart={handleRemoveItemToCart}
           showDescription={false}
