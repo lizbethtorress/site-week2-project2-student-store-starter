@@ -34,12 +34,36 @@ export default function App() {
     // Implement your logic here
   };
 
-  const handleAddItemToCart = (item) => {
-    console.log("name", item)
-    setShoppingCart([...shoppingCart, item]);
+  const handleAddItemToCart = (productId) => {
+    // console.log("name", item)
+    // setShoppingCart([...shoppingCart, item]);
+    setShoppingCart(prevCart => {
+      const existingItemIndex = prevCart.findIndex((item) => item.itemId === productId);
+      if (existingItemIndex === -1) {
+        const product = productList.find((product) => product.id === productId);
+        return [...prevCart, { itemId: productId, quantity: 1, price: product.price }];
+      }
+      const updatedCart = [...prevCart];
+      updatedCart[existingItemIndex].quantity += 1;
+      return updatedCart;
+    });
   };
-  const handleRemoveItemFromCart = (itemId) => {
-    setShoppingCart(shoppingCart.filter((item) => item.itemId !== itemId));
+
+  const handleRemoveItemFromCart = (productId) => {
+    // setShoppingCart(shoppingCart.filter((item) => item.itemId !== itemId));
+    setShoppingCart((prevCart) => {
+      const existingItemIndex = prevCart.findIndex((item) => item.itemId === productId);
+      if (existingItemIndex === -1) return prevCart; // Item not found in cart
+      const updatedCart = [...prevCart];
+      const existingItem = updatedCart[existingItemIndex];
+      // If the quantity is more than 1, decrement it. Otherwise, remove the item from the cart.
+      if (existingItem.quantity > 1) {
+        existingItem.quantity -= 1;
+      } else {
+        updatedCart.splice(existingItemIndex, 1);
+      }
+      return updatedCart;
+    });
   };
 
   useEffect(() => {
@@ -54,6 +78,7 @@ export default function App() {
         console.error(error);
       });
   }, []);
+  console.log("list", productList)
 
   return (
     <BrowserRouter>

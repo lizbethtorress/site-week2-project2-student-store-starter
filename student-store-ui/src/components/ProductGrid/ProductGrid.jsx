@@ -5,7 +5,7 @@ import "./ProductGrid.css"
 const ProductGrid = ({
   products,
   handleAddItemToCart,
-  handleRemoveItemToCart
+  handleRemoveItemFromCart
 }) => {
   // const filteredData = categoryProd
   // ?products.filter((product) => product.categ)
@@ -18,7 +18,7 @@ const ProductGrid = ({
           product={product}
           productId={product.id}
           handleAddItemToCart={handleAddItemToCart}
-          handleRemoveItemToCart={handleRemoveItemToCart}
+          handleRemoveItemFromCart={handleRemoveItemFromCart}
           showDescription={false}
         />
       ))}

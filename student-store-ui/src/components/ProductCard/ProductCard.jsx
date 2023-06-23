@@ -4,10 +4,10 @@ import "./ProductCard.css"
 
 const ProductCard = ({
     product,
-    productId,
     quantity,
+    productId,
     handleAddItemToCart,
-    handleRemoveItemToCart,
+    handleRemoveItemFromCart,
     showDescription
     }) => {
     
@@ -18,7 +18,7 @@ const ProductCard = ({
     };
     
     const handleRemoveFromCart = () => {
-    handleRemoveItemToCart(productId);
+    handleRemoveItemFromCart(productId);
     };
 
   return (
