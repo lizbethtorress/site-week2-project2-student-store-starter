@@ -26,8 +26,6 @@
     align-items: center;
     flex: 1;
     margin-right: 40px;
-    /* max-width: 500px; */
-    /* width: 100%; */
   }
   .secondBar .content .search-bar input {
     height: 40px;
@@ -114,7 +112,7 @@
     transform: scale(0.01);
   }
   .secondBar .category-menu li.is-active button {
-    border-bottom: solid 2px var(--bright-green);
+    border-bottom: solid 2px #00c385;
   }
   .secondBar .category-menu li button {
     cursor: pointer;

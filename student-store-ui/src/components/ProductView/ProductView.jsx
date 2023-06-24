@@ -1,7 +1,6 @@
 import React from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 import "./ProductView.css"
-// import ProductDetail from '../ProductDetail/ProductDetail';
 
 const ProductView = ({
   product,

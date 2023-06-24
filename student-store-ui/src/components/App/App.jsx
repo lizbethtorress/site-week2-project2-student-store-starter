@@ -8,57 +8,79 @@ import Hero from "../Hero/Hero";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-import ProductGrid from "../ProductGrid/ProductGrid";
-import { Link } from "react-router-dom";
 import ProductDetail from "../ProductDetail/ProductDetail";
-import About from "../About/About";
 
 export default function App() {
+  const INITIAL_FORM = {fullName: '', email: ''}
   const [isOpen, setIsOpen] = useState(false);
-  const [checkoutForm, setCheckoutForm] = useState({});
+  const [checkoutForm, setCheckoutForm] = useState(INITIAL_FORM);
   const [shoppingCart, setShoppingCart] = useState([]);
-
   const [productList, setProductList] = useState([]);
+  const [receiptMessage, setReceiptMessage] = useState('');
 
   const handleOnToggle = () => {
     setIsOpen(!isOpen);
   };
 
   const handleOnCheckoutFormChange = (e) => {
-    // Update checkoutForm state
-    setCheckoutForm({ ...checkoutForm, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setCheckoutForm((prevForm) => ({
+      ...prevForm,
+      [name]: value,
+    }));
   };
 
-  const handleOnSubmitCheckoutForm = () => {
-    // Submit the order to the API
-    // Implement your logic here
+  const handleOnSubmitCheckoutForm = (event) => {
+    event.preventDefault();
+  
+    let subtotal = 0;
+    let cartItems = '';
+  
+    shoppingCart.forEach((item) => {
+      const product = productList.find((product) => product.id === item.itemId);
+      if (product) {
+        subtotal += product.price * item.quantity;
+        cartItems += `${item.quantity}x ${product.name}\n`;
+      }
+    });
+  
+    let receiptMessage = `Showing receipt for ${checkoutForm.fullName} available at ${checkoutForm.email}:\n\n${cartItems}\n`;
+    receiptMessage += `before taxes, subtotal was $${subtotal.toFixed(2)}`
+  
+    setReceiptMessage(receiptMessage);
+    setShoppingCart([]);
+    setCheckoutForm(INITIAL_FORM);
   };
-
+  
   const handleAddItemToCart = (productId) => {
-    // console.log("name", item)
-    // setShoppingCart([...shoppingCart, item]);
-    setShoppingCart(prevCart => {
-      const existingItemIndex = prevCart.findIndex((item) => item.itemId === productId);
+    setShoppingCart((prevCart) => {
+      const existingItemIndex = prevCart.findIndex(
+        (item) => item.itemId === productId
+      );
       if (existingItemIndex === -1) {
         const product = productList.find((product) => product.id === productId);
-        return [...prevCart, { itemId: productId, quantity: 1, price: product.price }];
+        return [
+          ...prevCart,
+          { itemId: productId, quantity: 1, price: product.price },
+        ];
       }
       const updatedCart = [...prevCart];
-      updatedCart[existingItemIndex].quantity += 1;
+      updatedCart[existingItemIndex].quantity += .5;
       return updatedCart;
     });
   };
 
   const handleRemoveItemFromCart = (productId) => {
-    // setShoppingCart(shoppingCart.filter((item) => item.itemId !== itemId));
     setShoppingCart((prevCart) => {
-      const existingItemIndex = prevCart.findIndex((item) => item.itemId === productId);
+      const existingItemIndex = prevCart.findIndex(
+        (item) => item.itemId === productId
+      );
       if (existingItemIndex === -1) return prevCart; // Item not found in cart
       const updatedCart = [...prevCart];
       const existingItem = updatedCart[existingItemIndex];
       // If the quantity is more than 1, decrement it. Otherwise, remove the item from the cart.
       if (existingItem.quantity > 1) {
-        existingItem.quantity -= 1;
+        existingItem.quantity -= .5;
       } else {
         updatedCart.splice(existingItemIndex, 1);
       }
@@ -78,35 +100,26 @@ export default function App() {
         console.error(error);
       });
   }, []);
-  console.log("list", productList)
-
+  console.log("list", productList);
   return (
     <BrowserRouter>
       <Navbar />
       <Sidebar
-                isOpen={isOpen}
-                shoppingCart={shoppingCart}
-                products={productList}
-                checkoutForm={checkoutForm}
-                handleOnCheckoutFormChange={handleOnCheckoutFormChange}
-                handleOnSubmitCheckoutForm={handleOnSubmitCheckoutForm}
-                handleOnToggle={handleOnToggle}
-              />
+        isOpen={isOpen}
+        shoppingCart={shoppingCart}
+        products={productList}
+        checkoutForm={checkoutForm}
+        receipt={receiptMessage}
+        handleOnCheckoutFormChange={handleOnCheckoutFormChange}
+        handleOnSubmitCheckoutForm={handleOnSubmitCheckoutForm}
+        handleOnToggle={handleOnToggle}
+      />
       <Hero />
       <Routes>
         <Route
           path="/"
           element={
             <>
-              {/* <Sidebar
-                isOpen={isOpen}
-                shoppingCart={shoppingCart}
-                products={productList}
-                checkoutForm={checkoutForm}
-                handleOnCheckoutFormChange={handleOnCheckoutFormChange}
-                handleOnSubmitCheckoutForm={handleOnSubmitCheckoutForm}
-                handleOnToggle={handleOnToggle}
-              /> */}
               <Home
                 products={productList}
                 handleAddItemToCart={handleAddItemToCart}
@@ -115,8 +128,11 @@ export default function App() {
             </>
           }
         />
-        <Route path="/" element={<Home />} />  
-        <Route path="/products/:productId" element={<ProductDetail productList ={productList}/>} />
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/products/:productId"
+          element={<ProductDetail productList={productList} />}
+        />
       </Routes>
     </BrowserRouter>
   );

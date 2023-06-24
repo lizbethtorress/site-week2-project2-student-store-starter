@@ -1,23 +1,4 @@
-/* .product-card {
-    height: 350px;
-    width: 250px;
-    background: white;
-    display: flex;
-    flex-direction: column;
-    border: solid 1px var(--border-color);
-}
-.product-card .media {
-    width: 100%;
-    max-width: 800px;
-    display: flex;
-    justify-content: center;
-}
-.product-card .media img {
-    max-width: 200px;
-} */
-
 .product-card {
-    
     background-color: white;
     border: 1px solid #E1E4E8;
     border-radius: 6px;
@@ -33,7 +14,6 @@
   .add, .remove {
     margin: 4px;
     padding: 8px 16px;
-    /* background-color: #00c385; */
     background: #00c385;
     color: white;
     fill: white;

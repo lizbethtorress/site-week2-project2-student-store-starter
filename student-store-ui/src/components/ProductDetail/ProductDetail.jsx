@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Link } from "react-router-dom";
 import ProductView from "../ProductView/ProductView"
 
 
@@ -18,8 +17,6 @@ const ProductDetail = ({
       try {
         const response = await axios.get(`https://codepath-store-api.herokuapp.com/store/${productId}`);
         setProduct(response.data);
-        // console.log(response.data)
-        // console.log(`product is ${product.product.name}`)
         setLoading(false);
       } catch (error) {
         setLoading(false);

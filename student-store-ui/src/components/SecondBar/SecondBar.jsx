@@ -1,7 +1,6 @@
 import React from "react";
 import "./SecondBar.css";
 import { useState } from "react";
-import Home from "../Home/Home";
 
 const SecondBar = ({ handleSubmit, handleCategory, onCategory }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -11,11 +10,6 @@ const SecondBar = ({ handleSubmit, handleCategory, onCategory }) => {
     setSearchTerm(item);
     handleSubmit(item);
   };
-  // const [categoryProd, setcategoryProd] = useState([]);
-
-  // const handleCategory = (category) => {
-  //   setcategoryProd(category)
-  // }
 
   const categories = ["All Categories", "Clothing","Food", "Accessories", "Tech"]
 

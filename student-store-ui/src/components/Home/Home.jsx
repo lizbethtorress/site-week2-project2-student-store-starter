@@ -12,7 +12,7 @@ import Content from "../Content/Content";
 import Contact from "../Contact/Contact";
 import { useState, useEffect } from "react";
 
-const Home = ({ products, handleAddItemToCart, handleRemoveItemFromCart }) => {
+const Home = ({ products, handleAddItemToCart, handleRemoveItemFromCart, quantity }) => {
   const [originalProduct, setoriginalProduct] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
 

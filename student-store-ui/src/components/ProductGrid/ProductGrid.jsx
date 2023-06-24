@@ -7,8 +7,6 @@ const ProductGrid = ({
   handleAddItemToCart,
   handleRemoveItemFromCart
 }) => {
-  // const filteredData = categoryProd
-  // ?products.filter((product) => product.categ)
   
   return (
     <div className="product-grid" id= "buy">
