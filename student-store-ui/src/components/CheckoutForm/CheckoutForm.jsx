@@ -42,7 +42,7 @@ export default function CheckoutForm({
       >
         Checkout
       </button>
-      {receipt && <div className="checkout-form-receipt">{receipt}</div>}
+      {receipt && <div className="checkout-form-receipt"><p>{receipt}</p></div>}
       {checkoutForm.error && (
         <div className="checkout-form-error">{checkoutForm.error}</div>
       )}

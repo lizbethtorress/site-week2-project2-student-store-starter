@@ -18,6 +18,7 @@ export default function App() {
   const [productList, setProductList] = useState([]);
   const [receiptMessage, setReceiptMessage] = useState('');
 
+
   const handleOnToggle = () => {
     setIsOpen(!isOpen);
   };
@@ -35,17 +36,23 @@ export default function App() {
   
     let subtotal = 0;
     let cartItems = '';
+    let taxes = .0875
+    let total = 0 
   
     shoppingCart.forEach((item) => {
+    
+
       const product = productList.find((product) => product.id === item.itemId);
       if (product) {
         subtotal += product.price * item.quantity;
+        taxes = subtotal * .0875
         cartItems += `${item.quantity}x ${product.name}\n`;
+        total = subtotal + taxes 
       }
     });
   
-    let receiptMessage = `Showing receipt for ${checkoutForm.fullName} available at ${checkoutForm.email}:\n\n${cartItems}\n`;
-    receiptMessage += `before taxes, subtotal was $${subtotal.toFixed(2)}`
+    let receiptMessage = `Showing receipt for ${checkoutForm.fullName} available at ${checkoutForm.email}:\n\n\n${cartItems}\n`;
+    receiptMessage += `your subtotal was $${subtotal.toFixed(2)} and after taxes (${taxes.toFixed(2)}) your total comes out to $${total.toFixed(2)}`
   
     setReceiptMessage(receiptMessage);
     setShoppingCart([]);
