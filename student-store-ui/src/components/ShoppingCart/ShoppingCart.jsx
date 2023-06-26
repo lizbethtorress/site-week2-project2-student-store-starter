@@ -22,6 +22,12 @@ const ShoppingCart = ({ products, shoppingCart }) => {
     const totalPrice = subtotal + taxAmount;
     return totalPrice.toFixed(2);
   };
+  const taxesFees = () => {
+    const subtotal = parseFloat(calculateSubtotal());
+    const taxRate = 0.0875;
+    const taxAmount = subtotal * taxRate;
+    return taxAmount.toFixed(2);
+  }
 
   return (
     <div className="shopping-cart">
@@ -62,6 +68,7 @@ const ShoppingCart = ({ products, shoppingCart }) => {
             </div>
           </div>
           <div className="calculations">
+            <div className="taxes-fees">Taxes & Fees: ${taxesFees()}</div>
             <div className="subtotal">Subtotal: ${calculateSubtotal()}</div>
             <div className="total-price">
               Total Price: ${calculateTotalPrice()}
