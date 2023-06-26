@@ -60,7 +60,4 @@ The video for this project
 - [ ] Your choice! (Replace this bullet explaining what you implemented. Example: Users can create a wish list of products they are interested in but not yet ready to purchase.)
 
 Part 2: 
-<a href="https://www.loom.com/share/bce2d7fb566c45c896483e178ab7d9f1">
-    <p>Library | Loom - 26 June 2023 - Watch Video</p>
-    <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/bce2d7fb566c45c896483e178ab7d9f1-with-play.gif">
-  </a>
+<div style="position: relative; padding-bottom: 55.46875%; height: 0;"><iframe src="https://www.loom.com/embed/bce2d7fb566c45c896483e178ab7d9f1?sid=13c1b0dc-f3fe-415f-9737-b66709382ae7" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
